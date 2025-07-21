@@ -2,6 +2,7 @@
     <a href="/">Home</a>
     <a href="/playlists">Playlists</a>
     <% if (user) { %>
+        <a href="/playlists/newPlaylist">Create Playlist</a>
         <a href="/auth/sign-out">Sign Out</a>
     <% } else { %>
         <a href="/auth/sign-up">Sign Up</a>

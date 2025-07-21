@@ -44,7 +44,7 @@ app.use((req, res)=>{
 })
 
 app.use((err, req, res, next)=>{
-    res.render('errors/error.ejs', err)
+    res.status(err.status || 500).render('errors/error.ejs', { error: err })
 })
 
 mongoose.connect(process.env.MONGODB_URI, {dbName : process.env.DB_NAME})
