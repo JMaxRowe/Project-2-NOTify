@@ -2,6 +2,8 @@ import express from 'express'
 import Playlist from '../models/playlist.js'
 import Song from '../models/song.js' 
 import isSignedIn from '../middleware/isSignedIn.js'
+import { upload } from '../utils/cloudinary.js'
+import cloudinaryUpload from '../utils/cloudinaryUpload.js'
 
 const router = express.Router()
 
@@ -22,9 +24,16 @@ router.get('/newPlaylist', isSignedIn, (req, res, next)=>{
     }
 })
 
-router.post('/', isSignedIn, async (req, res, next)=>{
+router.post('/', isSignedIn, upload.single('coverArt'), async (req, res, next)=>{
     try {
+         console.log('✏️ req.file:', req.file)             // should be an object
+        console.log('✏️ req.body.coverArt before:', req.body.coverArt)
         req.body.owner = req.session.user._id;
+        if(req.file){
+            const result = await cloudinaryUpload(req.file.buffer)
+            req.body.coverArt = result.secure_url
+        }
+        console.log('✏️ req.body.coverArt after:', req.body.coverArt)
         const newPlaylist = await Playlist.create(req.body)
         return res.redirect (`/playlists/${newPlaylist._id}`)
     } catch (error) {

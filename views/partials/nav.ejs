@@ -4,6 +4,7 @@
     <% if (user) { %>
         <a href="/playlists/newPlaylist">Create Playlist</a>
         <a href="/auth/sign-out">Sign Out</a>
+        <a href="/user/profile"><%=user.username%></a>
     <% } else { %>
         <a href="/auth/sign-up">Sign Up</a>
         <a href="/auth/sign-in">Sign In</a>

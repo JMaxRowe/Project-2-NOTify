@@ -1,5 +1,6 @@
 :root{
     --primary-color: #373737;
+    --secondary-color: #6e6e6e;
     --primary-text-color: #d6d6d6;
 
 }
@@ -7,6 +8,10 @@
 body{
     background-color: var(--primary-color);
     color: var(--primary-text-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 60px;
 }
 
 a{
@@ -15,7 +20,24 @@ a{
 nav{
     display: flex;
     justify-content: space-evenly;
+    width: 100%;
+    background-color: var(--secondary-color) ;
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+
 }
+
+.coverArt img {
+    display: block;
+    max-width: 50%;
+    width: 400px;
+    height: auto;
+    border-radius: 12px;
+    margin: 0 auto;
+}
+
 .modal {
     display: none;
     position: fixed;

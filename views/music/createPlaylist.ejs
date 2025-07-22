@@ -10,7 +10,7 @@
     <%- include('../partials/nav.ejs')%>
 
     <h1>Create Playlist:</h1>
-    <form action="/playlists" method="POST">
+    <form action="/playlists" method="POST" enctype="multipart/form-data">
         <div>
             <label hidden for="title">Title</label>
             <input type="text" name="title" id="title" placeholder="Title" required>
@@ -18,6 +18,10 @@
         <div>
             <label hidden for="description">Description</label>
             <input type="text" name="description" id="description" placeholder="Description">
+        </div>
+        <div>
+            <label  for="coverArt">Upload Cover Art</label>
+            <input type="file" name="coverArt" id="coverArt" accept="image/*">
         </div>
         <button type="submit">Create Playlist</button>
     </form>

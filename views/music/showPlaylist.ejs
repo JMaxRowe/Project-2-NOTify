@@ -8,6 +8,10 @@
 </head>
 <body>
     <%- include('../partials/nav.ejs') %>
+    <div class="coverArt">
+        <img src="<%=playlist.coverArt%>" alt="<%=playlist.title%>'s cover art">
+    </div>
+    
     <h1><%=playlist.title%></h1>
     <h3><%=playlist.description%></h3>
 
