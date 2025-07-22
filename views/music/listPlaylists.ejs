@@ -9,11 +9,15 @@
 <body>
     <%- include('../partials/nav.ejs') %>
     <h1>Explore Playlists:</h1>
-    <% playlists.forEach(playlist => { %>
-        <div class="playlist-item">
+    <div class="playlists-grid">
+        <% playlists.forEach(playlist => { %>
+        <div class="playlist-card">
             <a href="/playlists/<%= playlist._id %>"><%= playlist.title %> by <%= playlist.owner.username %></a>
+            <img src="<%=playlist.coverArt%>" alt="<%= playlist.title %> cover art">
+            <div class="playlist-title"><%=playlist.title%></div>
             
         </div>
     <% }) %>
+    </div>
 </body>
 </html>
