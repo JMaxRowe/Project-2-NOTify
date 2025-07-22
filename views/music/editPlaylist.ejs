@@ -18,6 +18,17 @@
             <label hidden for="description">Description</label>
             <input type="text" name="description" id="description" value="<%=playlist.description%>">
         </div>
+            <div class="song-list">
+        <% playlist.songs.forEach(song => { %>
+            <div class="song-item">
+                <h4><%= song.title %></h4>
+                <p>Artist: <%= song.artist %></p>
+                <form action="/playlists/<%= playlist._id %>/songs/<%= song._id %>?_method=DELETE" method="POST">
+                    <button type="submit">Remove</button>
+                </form>
+            </div>
+    <% }) %>
+    </div>
         <button type="submit">Save Changes</button>
     </form>
 </body>
