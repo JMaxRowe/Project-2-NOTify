@@ -1,5 +1,6 @@
 import express from 'express'
 import Playlist from '../models/playlist.js'
+import Song from '../models/song.js' 
 import isSignedIn from '../middleware/isSignedIn.js'
 
 const router = express.Router()
@@ -34,7 +35,7 @@ router.post('/', isSignedIn, async (req, res, next)=>{
 router.get('/:playlistId', async (req, res, next)=>{
     try {
         const {playlistId} = req.params
-        const playlist = await Playlist.findById(playlistId).populate('owner')
+        const playlist = await Playlist.findById(playlistId).populate('owner').populate('songs')
 
         return res.render ('music/showPlaylist.ejs', {playlist})
     } catch (error) {
@@ -58,6 +59,19 @@ router.get('/:playlistId/edit', isSignedIn, async (req, res, next)=>{
     try {
         const playlist = await Playlist.findById(req.params.playlistId).populate('owner')
         res.render('music/editPlaylist.ejs', { playlist })
+    } catch (error) {
+        next(error)
+    }
+})
+
+router.post('/:playlistId/songs', isSignedIn, async (req, res, next) =>{
+    try {
+        req.body.owner = req.session.user._id
+        const newSong = await Song.create(req.body)
+        const playlist = await Playlist.findById(req.params.playlistId)
+        playlist.songs.push(newSong._id)
+        await playlist.save()
+        res.redirect(`/playlists/${playlist._id}`)
     } catch (error) {
         next(error)
     }

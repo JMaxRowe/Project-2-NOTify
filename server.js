@@ -27,6 +27,7 @@ app.use(session({
     })
 }))
 app.use(passUserToView)
+app.use(express.static('public'))
 
 
 app.get('/', (req, res)=>{

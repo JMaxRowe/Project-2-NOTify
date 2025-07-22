@@ -1,0 +1,12 @@
+<form action="/playlists/<%= playlist._id %>/songs" method="POST">
+  <div>
+    <label for="title">Song Title</label>
+    <input id="title" name="title" required />
+    
+  </div>
+  <div>
+    <label for="artist">Artist</label>
+    <input id="artist" name="artist" required />
+  </div>
+  <button type="submit">Add Song</button>
+</form>

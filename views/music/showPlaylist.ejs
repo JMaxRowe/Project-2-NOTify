@@ -4,14 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%=playlist.title%></title>
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
     <h1><%=playlist.title%></h1>
     <h3><%=playlist.description%></h3>
 
+    <div class="song-list">
+        <% playlist.songs.forEach(song => { %>
+            <div class="song-item">
+                <h4><%= song.title %></h4>
+                <p>Artist: <%= song.artist %></p>
+            </div>
+    <% }) %>
+    </div>
+
+    <button id="addSongBtn">+ Add Song</button>
+
+    <div id="addSongModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <%- include('../partials/addSong.ejs', { playlist }) %>
+  </div>
+</div>
+
     <form action="/playlists/<%=playlist._id%>?_method=DELETE" method="POST">
         <button type="submit">Delete Playlist</button>
     </form>
     <a href="/playlists/<%=playlist._id%>/edit">Edit Playlist</a>
+    <script src="/js/modal.js"></script>
 </body>
 </html>
