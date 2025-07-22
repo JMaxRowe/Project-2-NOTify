@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%=playlist.title%></title>
+</head>
+<body>
+    <h1><%=playlist.title%></h1>
+    <h3><%=playlist.description%></h3>
+
+    <form action="/playlists/<%=playlist._id%>?_method=DELETE" method="POST">
+        <button type="submit">Delete Playlist</button>
+    </form>
+    <a href="/playlists/<%=playlist._id%>/edit">Edit Playlist</a>
+</body>
+</html>

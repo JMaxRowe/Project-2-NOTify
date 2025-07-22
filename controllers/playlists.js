@@ -31,4 +31,36 @@ router.post('/', isSignedIn, async (req, res, next)=>{
     }
 })
 
+router.get('/:playlistId', async (req, res, next)=>{
+    try {
+        const {playlistId} = req.params
+        const playlist = await Playlist.findById(playlistId).populate('owner')
+
+        return res.render ('music/showPlaylist.ejs', {playlist})
+    } catch (error) {
+        next(error)
+    }
+})
+
+router.delete('/:playlistId', isSignedIn, async (req, res, next)=>{
+    try {
+        const playlist = await Playlist.findById(req.params.playlistId)
+        if(playlist.owner.equals(req.session.user._id)){
+            await playlist.deleteOne()
+            res.redirect('/playlists')
+        }
+    } catch (error) {
+        next(error)
+    }
+})
+
+router.get('/:playlistId/edit', isSignedIn, async (req, res, next)=>{
+    try {
+        const playlist = await Playlist.findById(req.params.playlistId).populate('owner')
+        res.render('music/editPlaylist.ejs', { playlist })
+    } catch (error) {
+        next(error)
+    }
+})
+
 export default router

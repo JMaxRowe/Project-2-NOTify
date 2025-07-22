@@ -10,7 +10,7 @@
     <h1>Explore Playlists:</h1>
     <% playlists.forEach(playlist => { %>
         <div class="playlist-item">
-            <a href="/playlists/<%= playlist._id %>"><%= playlist.name %>by <%= playlist.owner.username %></a>
+            <a href="/playlists/<%= playlist._id %>"><%= playlist.title %> by <%= playlist.owner.username %></a>
             
         </div>
     <% }) %>
