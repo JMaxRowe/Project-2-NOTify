@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
+    <%- include('../partials/nav.ejs') %>
     <h1><%=playlist.title%></h1>
     <h3><%=playlist.description%></h3>
 
@@ -18,20 +19,22 @@
             </div>
     <% }) %>
     </div>
-
-    <button id="addSongBtn">+ Add Song</button>
-
+    <% if (user && user._id == playlist.owner._id) { %>
+        <button id="addSongBtn">+ Add Song</button>
+    <% } %>
     <div id="addSongModal" class="modal">
   <div class="modal-content">
     <span class="close">&times;</span>
     <%- include('../partials/addSong.ejs', { playlist }) %>
   </div>
 </div>
+    <% if (user && user._id == playlist.owner._id) { %>
+        <form action="/playlists/<%=playlist._id%>?_method=DELETE" method="POST">
+            <button type="submit">Delete Playlist</button>
+        </form>
+        <a href="/playlists/<%=playlist._id%>/edit">Edit Playlist</a>
+    <% } %>
 
-    <form action="/playlists/<%=playlist._id%>?_method=DELETE" method="POST">
-        <button type="submit">Delete Playlist</button>
-    </form>
-    <a href="/playlists/<%=playlist._id%>/edit">Edit Playlist</a>
     <script src="/js/modal.js"></script>
 </body>
 </html>
