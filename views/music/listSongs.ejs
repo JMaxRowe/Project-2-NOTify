@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Songs</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <%- include('../partials/nav.ejs') %>
+    <h1>Explore Songs:</h1>
+    <div class="songs-grid">
+        <% songs.forEach(song => { %>
+        <div class="song-card">
+            <p><%= song.title %> by <%= song.artist %></p>
+            
+        </div>
+    <% }) %>
+</body>
+</html>

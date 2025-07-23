@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Songs</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <%- include('../partials/nav.ejs') %>
+    <h1>Upload a new song</h1>
+    <form action="/songs/new" method="POST" enctype="multipart/form-data">
+        <div>
+            <label  for="title">Song title</label>
+            <input name="title" id="title">
+        </div>
+        <div>
+            <label  for="artist">Artist</label>
+            <input name="artist" id="artist">
+        </div>
+        <div>
+            <label  for="song">Upload Song</label>
+            <input type="file" name="song" id="song" accept="audio/*">
+        </div>
+</form>
+    
+</body>
+</html>

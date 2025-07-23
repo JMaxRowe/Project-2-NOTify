@@ -24,16 +24,24 @@ router.get('/newPlaylist', isSignedIn, (req, res, next)=>{
     }
 })
 
-router.post('/', isSignedIn, upload.single('coverArt'), async (req, res, next)=>{
+const uploadFiles = upload.fields([
+    {name: 'coverArt', maxCount: 1},
+    {name: 'song', maxCount: 1}
+])
+
+router.post('/', isSignedIn, uploadFiles, async (req, res, next)=>{
     try {
-         console.log('✏️ req.file:', req.file)             // should be an object
-        console.log('✏️ req.body.coverArt before:', req.body.coverArt)
         req.body.owner = req.session.user._id;
-        if(req.file){
-            const result = await cloudinaryUpload(req.file.buffer)
-            req.body.coverArt = result.secure_url
+        if(Object.keys(req.files).length < 0){
+            if(req.files.coverArt){
+                await cloudinaryUpload(req.files.coverArt[0].buffer)
+                req.body.coverArt = result.secure_url 
+            }
+            if(req.files.song){
+                await cloudinaryUpload(req.files.song[0].buffer)
+                req.body.song = result.secure_url 
+            }
         }
-        console.log('✏️ req.body.coverArt after:', req.body.coverArt)
         const newPlaylist = await Playlist.create(req.body)
         return res.redirect (`/playlists/${newPlaylist._id}`)
     } catch (error) {

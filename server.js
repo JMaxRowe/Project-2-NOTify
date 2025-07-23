@@ -10,6 +10,7 @@ import passUserToView from './middleware/passUserToView.js'
 import authRouter from './controllers/auth.js'
 import userRouter from './controllers/users.js'
 import playlistsRouter from './controllers/playlists.js'
+import songsRouter from './controllers/songs.js'
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -37,6 +38,7 @@ app.get('/', (req, res)=>{
 app.use('/auth', authRouter)
 app.use('/user', userRouter)
 app.use('/playlists', playlistsRouter)
+app.use('/songs', songsRouter)
 
 
 

@@ -1,7 +1,8 @@
 :root{
-    --primary-color: #373737;
-    --secondary-color: #6e6e6e;
-    --primary-text-color: #d6d6d6;
+    --primary-color: #202020;
+    --secondary-color: #323232;
+    --primary-text-color: #befbc0;
+    --primary-link-color:#64f457;
 
 }
 
@@ -14,8 +15,25 @@ body{
     padding-top: 60px;
 }
 
+.playlists-grid{
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 100%;
+    width: 1000px;
+    gap: 15px;
+}
+
+.playlist-card{
+    width: calc(25% - (45px / 4));
+}
+
+.playlist-card img{
+    width: 100%;
+    border-radius: 12px;
+}
+
 a{
-    color:#a3a9c2;
+    color:var(--primary-link-color);
 }
 nav{
     display: flex;
@@ -28,6 +46,7 @@ nav{
     left: 0;
 
 }
+
 
 .coverArt img {
     display: block;

@@ -1,7 +1,7 @@
 import {cloudinary} from "./cloudinary.js"
 import { createReadStream } from "streamifier"
 
-export default function cloudinaryUpload(fileBuffer){
+export default function cloudinaryUpload(fileBuffer, type = 'image'){
     return new Promise((resolve, reject)=>{
         const stream = cloudinary.uploader.upload_stream(
             {folder: 'NOTify'},
