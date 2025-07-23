@@ -11,13 +11,16 @@
     <h1>Explore Playlists:</h1>
     <div class="playlists-grid">
         <% playlists.forEach(playlist => { %>
-        <div class="playlist-card">
-            <a href="/playlists/<%= playlist._id %>"><%= playlist.title %> by <%= playlist.owner.username %></a>
-            <img src="<%=playlist.coverArt%>" alt="<%= playlist.title %> cover art">
+        <div class="playlist-card"
+            data-url = "/playlists/<%= playlist._id %>"
+            style ="cursor: pointer;"
+            >
+            <img src="<%=playlist.coverArt || DEFAULT_PLAYLIST_COVER%>" alt="<%= playlist.title %> cover art">
             <div class="playlist-title"><%=playlist.title%></div>
-            
+            <div class="playlist-owner">Created by: <%=playlist.owner.username%></div>
         </div>
     <% }) %>
     </div>
+    <script src="/js/clickOnPlaylist.js"></script>
 </body>
 </html>

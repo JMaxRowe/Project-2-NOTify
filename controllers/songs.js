@@ -40,7 +40,24 @@ router.post('/new', isSignedIn, async (req, res, next)=>{
 router.get('/show', async (req, res, next)=>{
     try {
         const songs = await Song.find().populate('owner')
-        return res.render('music/listSongs.ejs', {songs})
+        const playlists = await Playlist.find({owner: req.session.user._id})
+        return res.render('music/listSongs.ejs', {songs, playlists})
+    } catch (error) {
+        next(error)
+    }
+})
+
+router.post('/:songId/add-to-playlist', isSignedIn, async(req, res, next)=>{
+    try {
+        const playlist = await Playlist.findById(req.body.playlistId)
+        if (!playlist.owner.equals(req.session.user._id)){
+            return res.send("You don't have permission")
+        }
+        if (!playlist.songs.includes(req.params.songId)){
+            playlist.songs.push(req.params.songId)
+            await playlist.save()
+        }
+        return res.redirect('/songs/show')
     } catch (error) {
         next(error)
     }

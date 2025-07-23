@@ -35,6 +35,17 @@ body{
 a{
     color:var(--primary-link-color);
 }
+
+.song-item{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    width: 500px;
+    height: 35px;
+    justify-content: space-around;
+    background-color: var(--secondary-color);
+    border-radius: 12px;
+}
 nav{
     display: flex;
     justify-content: space-evenly;

@@ -10,7 +10,10 @@ const router = express.Router()
 router.get('/', async (req, res, next)=>{
     try {
         const playlists = await Playlist.find().populate('owner')
-        return res.render('music/listPlaylists.ejs', { playlists })
+        return res.render('music/listPlaylists.ejs', { 
+            playlists,
+            DEFAULT_PLAYLIST_COVER: process.env.DEFAULT_PLAYLIST_COVER
+        })
     } catch (error) {
         next (error)
     }
@@ -54,7 +57,10 @@ router.get('/:playlistId', async (req, res, next)=>{
         const {playlistId} = req.params
         const playlist = await Playlist.findById(playlistId).populate('owner').populate('songs')
 
-        return res.render ('music/showPlaylist.ejs', {playlist})
+        return res.render ('music/showPlaylist.ejs', {
+            playlist, 
+            DEFAULT_PLAYLIST_COVER: process.env.DEFAULT_PLAYLIST_COVER
+        })
     } catch (error) {
         next(error)
     }
