@@ -15,23 +15,22 @@ router.get('/new',isSignedIn, (req, res, next)=>{
     }
 })
 
-router.post('/new', isSignedIn, async (req, res, next)=>{
+router.post('/new', isSignedIn, upload.single('song'), async (req, res, next)=>{
     try {
-        const owner = req.session.user._id
+        req.body.owner = req.session.user._id
+
         let songUrl
-        if (req.file && req.file.path){
-            songUrl = req.file.path
-        }else if (req.file && req.file.buffer){
-            const result = await cloudinaryUpload(req.file.buffer, 'video')
+        if (req.file && req.file.buffer){
+            const result = await cloudinaryUpload(req.file.buffer, 'auto')
             songUrl = result.secure_url
         }
         const newSong = await Song.create({
             title: req.body.title,
             artist: req.body.artist,
-            owner,
-            fileName: songUrl
+            owner: req.body.owner,
+            url: songUrl
         })
-        return res.redirect('/')
+        return res.redirect('/songs/show')
     } catch (error) {
         next(error)
     }

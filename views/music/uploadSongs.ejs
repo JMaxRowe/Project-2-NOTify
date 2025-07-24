@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upload Songs</title>
@@ -10,19 +13,21 @@
     <%- include('../partials/nav.ejs') %>
     <h1>Upload a new song</h1>
     <form action="/songs/new" method="POST" enctype="multipart/form-data">
-        <div>
+        <div class="form-input">
             <label  for="title">Song title</label>
             <input name="title" id="title">
         </div>
-        <div>
+        <div class="form-input">
             <label  for="artist">Artist</label>
             <input name="artist" id="artist">
         </div>
-        <div>
+        <div class="form-input">
             <label  for="song">Upload Song</label>
             <input type="file" name="song" id="song" accept="audio/*">
         </div>
+        <button type="submit">Upload song</button>
 </form>
-    
+     <audio id="global-audio" style="display:none"></audio>
+    <script src="/js/player.js" defer></script>
 </body>
 </html>

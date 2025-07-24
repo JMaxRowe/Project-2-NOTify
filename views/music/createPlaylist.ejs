@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
@@ -11,19 +14,21 @@
 
     <h1>Create Playlist:</h1>
     <form action="/playlists" method="POST" enctype="multipart/form-data">
-        <div>
+        <div class="form-input">
             <label hidden for="title">Title</label>
             <input type="text" name="title" id="title" placeholder="Title" required>
         </div>
-        <div>
+        <div class="form-input">
             <label hidden for="description">Description</label>
             <input type="text" name="description" id="description" placeholder="Description">
         </div>
-        <div>
+        <div class="form-input">
             <label  for="coverArt">Upload Cover Art</label>
             <input type="file" name="coverArt" id="coverArt" accept="image/*">
         </div>
         <button type="submit">Create Playlist</button>
     </form>
+    <audio id="global-audio" style="display:none"></audio>
+    <script src="/js/player.js" defer></script>
 </body>
 </html>

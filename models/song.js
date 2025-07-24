@@ -6,7 +6,7 @@ const songSchema = new mongoose.Schema({
     title:{type: String, required: true},
     artist: {type: String, required: true},
     duration: {type: Number},
-    fileName: {type: String},
+    url: {type: String},
     owner: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
