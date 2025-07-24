@@ -37,4 +37,23 @@
         audio.play().catch(() => {})
         })
     })
+    const playPauseIcon = document.getElementById('playPauseIcon')
+
+    if (playPauseIcon){
+        function updateIcon(isPlaying) {
+            playPauseIcon.classList.toggle('fa-play', !isPlaying)
+            playPauseIcon.classList.toggle('fa-pause', isPlaying)
+        }
+    }
+
+    updateIcon (wasPlaying)
+
+    playPauseIcon.addEventListener('click', () =>{
+        if (audio.paused) audio.play().catch(()=>{})
+        else audio.pause()
+    })
+
+    audio.addEventListener('play',  () => updateIcon(true))
+    audio.addEventListener('pause', () => updateIcon(false))
 })
+
