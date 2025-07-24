@@ -27,16 +27,10 @@
             </div>
     <% }) %>
     </div>
+    
     <% if (user && user._id == playlist.owner._id) { %>
-        <button id="addSongBtn">+ Add Song</button>
-    <% } %>
-    <div id="addSongModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <%- include('../partials/addSong.ejs', { playlist }) %>
-        </div>
-    </div>
-    <% if (user && user._id == playlist.owner._id) { %>
+        <a href="/songs/show">+ Explore songs to add to playlist</a>
+        <a href="/songs/new">Upload music to add to playlist</a>
         <form action="/playlists/<%=playlist._id%>?_method=DELETE" method="POST">
             <button type="submit">Delete Playlist</button>
         </form>

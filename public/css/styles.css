@@ -86,7 +86,7 @@ nav{
     z-index: 100;
 }
 .modal-content {
-    background: #fff;
+    background: var(--secondary-color);
     margin: 10% auto;
     padding: 20px;
     width: 90%;

@@ -49,7 +49,8 @@ router.get('/:playlistId', async (req, res, next)=>{
 
         return res.render ('music/showPlaylist.ejs', {
             playlist, 
-            DEFAULT_PLAYLIST_COVER: process.env.DEFAULT_PLAYLIST_COVER
+            DEFAULT_PLAYLIST_COVER: process.env.DEFAULT_PLAYLIST_COVER,
+            user: req.session.user
         })
     } catch (error) {
         next(error)
