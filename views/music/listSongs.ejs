@@ -14,7 +14,7 @@
     <h1>Explore Songs:</h1>
     <div class="songs-grid">
     <% songs.forEach(song => { %>
-        <div class="song-item">
+        <div class="song-item" data-src="<%=song.url%>">
             <h3><%= song.title %></h3>
             <p>Artist: <%= song.artist %></p>
 
@@ -32,8 +32,10 @@
                 <% }) %>
                 </select>
                 <button type="submit">Add</button>
+                
             </form>
             <% } %>
+            <button class="play-btn"><i class="fa-solid fa-play"></i></button>
         </div>
         <% }) %>
     </div>

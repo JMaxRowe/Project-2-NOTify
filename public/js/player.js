@@ -2,6 +2,7 @@
     const audio = document.getElementById('global-audio')
     const playPauseIcon = document.getElementById('playPauseIcon')
     const titleEl = document.getElementById('currentSongTitle')
+    const progressBar = document.getElementById('progressBar')
     if (!audio) return
 
     const savedSrc   = localStorage.getItem('currentTrack')
@@ -25,9 +26,11 @@
 
     audio.addEventListener('loadedmetadata', () => {
         localStorage.setItem('currentTrack', audio.src)
+        progressBar.max = audio.duration
     })
     audio.addEventListener('timeupdate', () => {
         localStorage.setItem('currentTime', audio.currentTime)
+        progressBar.value = audio.currentTime
     })
     audio.addEventListener('play', () => {
         localStorage.setItem('isPlaying', 'true')
@@ -56,6 +59,9 @@ function updateIcon(isPlaying) {
         else audio.pause()
     })
 
+    progressBar.addEventListener('input', e => {
+        audio.currentTime = parseFloat(e.currentTarget.value)
+    })
 
 
 

@@ -10,11 +10,15 @@ router.get('/profile',isSignedIn, async (req, res, next)=>{
         const playlistsOwned = await Playlist.find({
             owner: loggedInUser
         }).populate('owner')
+        const songsOwned = await Song.find({
+            owner: loggedInUser
+        }).populate('owner')
         const playlists = await Playlist.find().populate('owner')
         return res.render('user/profile.ejs', {
             playlistsOwned,
             playlists,
-            DEFAULT_PLAYLIST_COVER: process.env.DEFAULT_PLAYLIST_COVER
+            DEFAULT_PLAYLIST_COVER: process.env.DEFAULT_PLAYLIST_COVER,
+            songsOwned
         })
     } catch (error) {
         next(error)
