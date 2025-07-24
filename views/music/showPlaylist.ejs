@@ -18,23 +18,57 @@
     <h1><%=playlist.title%></h1>
     <h3><%=playlist.description%></h3>
 
-    <div class="song-list">
+    <div class="songs-grid">
         <% playlist.songs.forEach(song => { %>
             <div class="song-item" data-src="<%= song.url %>">
-                <h4><%= song.title %></h4>
-                <p>Artist: <%= song.artist %></p>
-                <button class="play-btn"><i class="fa-solid fa-play"></i></button>
+                <table>
+                    <tr>
+                        <td>
+                            <h4><%= song.title %></h4>
+                        </td>
+                        <td>
+                            <p>Artist: <%= song.artist %></p>
+                        </td>
+                        <td><% if (user) { %>
+                            <form 
+                                action="/songs/<%= song._id %>/add-to-playlist" 
+                                method="POST" 
+                                class="add-to-playlist-form">
+                            
+                                <label for="pl-<%= song._id %>">Add to:</label>
+                                <select id="pl-<%= song._id %>" name="playlistId" required>
+                                <option value="" disabled selected>Choose playlist…</option>
+                                <% playlists.forEach(playlist => { %>
+                                    <option value="<%= playlist._id %>"><%= playlist.title %></option>
+                                <% }) %>
+                                </select>
+                                <button type="submit">Add</button>
+                                
+                            </form>
+                            <% } %>
+                        </td>
+                        <td>
+                            <button class="play-btn"><i class="fa-solid fa-play"></i></button>
+                        </td>
+                    </tr>
+                </table>
+                
+                
+                
             </div>
     <% }) %>
     </div>
     
     <% if (user && user._id == playlist.owner._id) { %>
-        <a href="/songs/show">+ Explore songs to add to playlist</a>
-        <a href="/songs/new">Upload music to add to playlist</a>
-        <form action="/playlists/<%=playlist._id%>?_method=DELETE" method="POST">
-            <button type="submit">Delete Playlist</button>
-        </form>
-        <a href="/playlists/<%=playlist._id%>/edit">Edit Playlist</a>
+        <div class="playlistOptions">
+            <a href="/songs/show">+ Explore songs to add to playlist</a>
+            <a href="/songs/new">Upload music to add to playlist</a>
+            <a href="/playlists/<%=playlist._id%>/edit">Edit Playlist</a>
+            <form class="deleteButton" action="/playlists/<%=playlist._id%>?_method=DELETE" method="POST">
+                <button type="submit">Delete Playlist</button>
+            </form>
+            </div>
+        
     <% } %>
 
     <%-include('../partials/playbar.ejs')%>

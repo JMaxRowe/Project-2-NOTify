@@ -1,6 +1,7 @@
 import express from 'express'
 import Playlist from '../models/playlist.js'
 import isSignedIn from '../middleware/isSignedIn.js'
+import Song from '../models/song.js'
 
 const router = express.Router()
 

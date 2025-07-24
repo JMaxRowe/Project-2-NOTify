@@ -3,12 +3,14 @@
     const playPauseIcon = document.getElementById('playPauseIcon')
     const titleEl = document.getElementById('currentSongTitle')
     const progressBar = document.getElementById('progressBar')
-    if (!audio) return
+    const volumeSlider = document.getElementById('volumeSlider')
+    if (!audio || !playPauseIcon || !titleEl || !progressBar || !volumeSlider) return
 
     const savedSrc   = localStorage.getItem('currentTrack')
     const savedTime  = parseFloat(localStorage.getItem('currentTime') || 0)
     const wasPlaying = localStorage.getItem('isPlaying') === 'true'
     const savedTitle = localStorage.getItem('currentTitle')
+    const savedVol = parseFloat(localStorage.getItem('audioVolume'))
 
     if(savedTitle){
         titleEl.textContent=savedTitle
@@ -39,7 +41,12 @@
         localStorage.setItem('isPlaying', 'false')
     })
 
-    
+    if (!isNaN(savedVol)) {
+        audio.volume= savedVol
+        volumeSlider.value = savedVol
+    } else {
+        volumeSlider.value = audio.volume
+    }
     
 
 function updateIcon(isPlaying) {
@@ -98,27 +105,32 @@ function updateIcon(isPlaying) {
     audio.play().catch(() => {})
     })
 
-    
-})
-
-document.addEventListener('DOMContentLoaded', () => {
-    const audio = document.getElementById('global-audio')
-    const volumeSlider = document.getElementById('volumeSlider')
-    if (!audio || !volumeSlider) return
-
-
-    const savedVol = parseFloat(localStorage.getItem('audioVolume'))
-    if (!isNaN(savedVol)) {
-        audio.volume= savedVol
-        volumeSlider.value = savedVol
-    } else {
-        volumeSlider.value = audio.volume
-    }
-
-
     volumeSlider.addEventListener('input', e => {
         const vol = parseFloat(e.currentTarget.value)
         audio.volume = vol
         localStorage.setItem('audioVolume', vol)
     })
+    
 })
+
+// document.addEventListener('DOMContentLoaded', () => {
+//     const audio = document.getElementById('global-audio')
+//     const volumeSlider = document.getElementById('volumeSlider')
+//     if (!audio || !volumeSlider) return
+
+
+//     const savedVol = parseFloat(localStorage.getItem('audioVolume'))
+//     if (!isNaN(savedVol)) {
+//         audio.volume= savedVol
+//         volumeSlider.value = savedVol
+//     } else {
+//         volumeSlider.value = audio.volume
+//     }
+
+
+//     volumeSlider.addEventListener('input', e => {
+//         const vol = parseFloat(e.currentTarget.value)
+//         audio.volume = vol
+//         localStorage.setItem('audioVolume', vol)
+//     })
+// })

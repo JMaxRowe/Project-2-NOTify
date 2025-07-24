@@ -62,4 +62,21 @@ router.post('/:songId/add-to-playlist', isSignedIn, async(req, res, next)=>{
     }
 })
 
+router.delete('/:songId/', isSignedIn, async(req, res, next)=>{
+    try {
+        const song = await Song.findById(req.params.songId)
+        if (!song.owner.equals(req.session.user._id)) {
+            return res.status(403).send("You don't have permission")
+        }
+        await song.deleteOne()
+        await Playlist.updateMany(
+            {songs: song._id},
+            {$pull: { songs: song._id}}
+        )
+        return res.redirect(`/user/profile`)
+    } catch (error) {
+        next(error)
+    }
+})
+
 export default router

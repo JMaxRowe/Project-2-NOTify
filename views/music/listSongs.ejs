@@ -15,27 +15,33 @@
     <div class="songs-grid">
     <% songs.forEach(song => { %>
         <div class="song-item" data-src="<%=song.url%>">
-            <h3><%= song.title %></h3>
-            <p>Artist: <%= song.artist %></p>
-
-            <% if (user) { %>
-            <form 
-                action="/songs/<%= song._id %>/add-to-playlist" 
-                method="POST" 
-                class="add-to-playlist-form"
-            >
-                <label for="pl-<%= song._id %>">Add to:</label>
-                <select id="pl-<%= song._id %>" name="playlistId" required>
-                <option value="" disabled selected>Choose playlist…</option>
-                <% playlists.forEach(playlist => { %>
-                    <option value="<%= playlist._id %>"><%= playlist.title %></option>
-                <% }) %>
-                </select>
-                <button type="submit">Add</button>
-                
-            </form>
-            <% } %>
-            <button class="play-btn"><i class="fa-solid fa-play"></i></button>
+            <table>
+                <tr>
+                    <td><h3><%= song.title %></h3></td>
+                    <td><p><%= song.artist %></p></td>
+                    <td><% if (user) { %>
+                        <form 
+                            action="/songs/<%= song._id %>/add-to-playlist" 
+                            method="POST" 
+                            class="add-to-playlist-form"
+                        >
+                        
+                            <label for="pl-<%= song._id %>">Add to:</label>
+                            <select id="pl-<%= song._id %>" name="playlistId" required>
+                            <option value="" disabled selected>Choose playlist…</option>
+                            <% playlists.forEach(playlist => { %>
+                                <option value="<%= playlist._id %>"><%= playlist.title %></option>
+                            <% }) %>
+                            </select>
+                            <button type="submit">Add</button>
+                            
+                        </form>
+                        <% } %>
+                    </td>
+                    <td><button class="play-btn"><i class="fa-solid fa-play"></i></button></td>
+                    
+                </tr>
+            </table>
         </div>
         <% }) %>
     </div>

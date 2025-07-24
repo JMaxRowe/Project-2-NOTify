@@ -46,9 +46,10 @@ router.get('/:playlistId', async (req, res, next)=>{
     try {
         const {playlistId} = req.params
         const playlist = await Playlist.findById(playlistId).populate('owner').populate('songs')
-
+        const playlists = await Playlist.find({owner: req.session.user._id})
         return res.render ('music/showPlaylist.ejs', {
             playlist, 
+            playlists,
             DEFAULT_PLAYLIST_COVER: process.env.DEFAULT_PLAYLIST_COVER,
             user: req.session.user
         })
@@ -72,7 +73,8 @@ router.delete('/:playlistId', isSignedIn, async (req, res, next)=>{
 router.get('/:playlistId/edit', isSignedIn, async (req, res, next)=>{
     try {
         const playlist = await Playlist.findById(req.params.playlistId).populate('owner').populate('songs')
-        res.render('music/editPlaylist.ejs', { playlist })
+        const playlists = await Playlist.find({owner: req.session.user._id})
+        res.render('music/editPlaylist.ejs', { playlist, playlists })
     } catch (error) {
         next(error)
     }

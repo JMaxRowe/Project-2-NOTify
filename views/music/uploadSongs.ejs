@@ -12,14 +12,14 @@
 <body>
     <%- include('../partials/nav.ejs') %>
     <h1>Upload a new song</h1>
-    <form action="/songs/new" method="POST" enctype="multipart/form-data">
+    <form class="form" id="uploadForm" action="/songs/new" method="POST" enctype="multipart/form-data">
         <div class="form-input">
-            <label  for="title">Song title</label>
-            <input name="title" id="title">
+            <label  for="title">Song Title</label>
+            <input name="title" id="title" placeholder="Song Title">
         </div>
         <div class="form-input">
             <label  for="artist">Artist</label>
-            <input name="artist" id="artist">
+            <input name="artist" id="artist" placeholder="Artist">
         </div>
         <div class="form-input">
             <label  for="song">Upload Song</label>
@@ -27,10 +27,19 @@
         </div>
         <button type="submit">Upload song</button>
 </form>
+
+<div id="uploadingOverlay" class="uploading-overlay hidden">
+    <div class="spinner">
+        <i class="fa-solid fa-spinner fa-spin-pulse"></i>
+        <p>Uploading Music...</p>
+    </div>
+</div>
+
     <%-include('../partials/playbar.ejs')%>
     <script src="/js/clickOnPlaylist.js"></script>
     <script src="https://kit.fontawesome.com/74f211b69a.js" crossorigin="anonymous"></script>
     <audio id="global-audio" style="display:none"></audio>
     <script src="/js/player.js" defer></script>
+    <script src="/js/spinner.js" defer></script>
 </body>
 </html>
