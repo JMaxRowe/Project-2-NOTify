@@ -50,6 +50,11 @@ a{
     text-decoration: none;
     cursor: pointer
 }
+
+a.heading{
+    font-size: 1.5em;
+}
+
 a:hover{
     color: var(--primary-text-color)
 }
@@ -147,7 +152,8 @@ nav{
     position: fixed;
     top: 0;
     left: 0;
-
+    height: 20px;
+    align-items: center;
 }
 
 
@@ -289,4 +295,9 @@ i{
 
 .errorMessage{
     color: var(--error-color)
+}
+
+.logo{
+    font-size: 2em;
+    font-weight: bold;
 }
