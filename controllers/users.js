@@ -9,9 +9,12 @@ router.get('/profile',isSignedIn, async (req, res, next)=>{
         const loggedInUser = req.session.user._id
         const playlistsOwned = await Playlist.find({
             owner: loggedInUser
-        })
+        }).populate('owner')
+        const playlists = await Playlist.find().populate('owner')
         return res.render('user/profile.ejs', {
-            playlistsOwned
+            playlistsOwned,
+            playlists,
+            DEFAULT_PLAYLIST_COVER: process.env.DEFAULT_PLAYLIST_COVER
         })
     } catch (error) {
         next(error)

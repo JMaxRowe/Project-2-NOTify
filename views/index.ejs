@@ -16,9 +16,23 @@
     <%} else {%>
         <h1>Welcome to NOTify, guest!</h1>
     <%}%>
-    
+
     <h2>Upload your music into playlists and listen to your heart's content.</h2>
-    <%-include('../partials/playbar.ejs')%>
+
+    <h3>Listen to Playlists:</h3>
+    <div class="playlists-grid">
+        <% playlists.slice(0,4).forEach(playlist => { %>
+        <div class="playlist-card"
+            data-url = "/playlists/<%= playlist._id %>"
+            style ="cursor: pointer;"
+            >
+            <img src="<%=playlist.coverArt || DEFAULT_PLAYLIST_COVER%>" alt="<%= playlist.title %> cover art">
+            <div class="playlist-title"><%=playlist.title%></div>
+            <div class="playlist-owner">Created by: <%=playlist.owner.username%></div>
+        </div>
+        <% }) %>
+    </div>
+    <%-include('partials/playbar.ejs')%>
     <script src="/js/clickOnPlaylist.js"></script>
     <script src="https://kit.fontawesome.com/74f211b69a.js" crossorigin="anonymous"></script>
     <audio id="global-audio" style="display:none"></audio>

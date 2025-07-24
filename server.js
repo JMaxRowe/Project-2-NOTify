@@ -11,6 +11,7 @@ import authRouter from './controllers/auth.js'
 import userRouter from './controllers/users.js'
 import playlistsRouter from './controllers/playlists.js'
 import songsRouter from './controllers/songs.js'
+import Playlist from './models/playlist.js'
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -31,8 +32,12 @@ app.use(passUserToView)
 app.use(express.static('public'))
 
 
-app.get('/', (req, res)=>{
-    res.render('index.ejs')
+app.get('/', async (req, res)=>{
+    const playlists = await Playlist.find().populate('owner')
+    res.render('index.ejs',{ 
+            playlists,
+            DEFAULT_PLAYLIST_COVER: process.env.DEFAULT_PLAYLIST_COVER
+        })
 })
 
 app.use('/auth', authRouter)
