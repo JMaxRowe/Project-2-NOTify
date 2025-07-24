@@ -31,6 +31,11 @@ router.get('/newPlaylist', isSignedIn, (req, res, next)=>{
 router.post('/', isSignedIn, upload.single('coverArt'), async (req, res, next)=>{
     try {
         req.body.owner = req.session.user._id;
+        const { title } = req.body
+        if (title.trim() === ""){
+            req.session.message = 'You must add a title.'
+            res.redirect('/playlists/newPlaylist')
+        }
         if(req.file){
             const result = await cloudinaryUpload(req.file.buffer)
             req.body.coverArt = result.secure_url

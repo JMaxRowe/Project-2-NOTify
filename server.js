@@ -6,6 +6,7 @@ import morgan from 'morgan'
 import session from 'express-session'
 import MongoStore from "connect-mongo"
 import passUserToView from './middleware/passUserToView.js'
+import passMessageToView from './middleware/passMessageToView.js'
 
 import authRouter from './controllers/auth.js'
 import userRouter from './controllers/users.js'
@@ -30,6 +31,7 @@ app.use(session({
 }))
 app.use(passUserToView)
 app.use(express.static('public'))
+app.use(passMessageToView)
 
 
 app.get('/', async (req, res)=>{

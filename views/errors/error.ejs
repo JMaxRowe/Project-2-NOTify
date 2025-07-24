@@ -8,8 +8,8 @@
 </head>
 <body>
     <%- include('../partials/nav.ejs') %>
-    <h1>An error occurred</h1>
-    <h2><%=error.message%></h2>
+    <h1 class="errorMessage">An error occurred</h1>
+    <h2 class="errorMessage"><%=error.message%></h2>
     <audio id="global-audio" style="display:none"></audio>
     <script src="/js/player.js" defer></script>
 </body>

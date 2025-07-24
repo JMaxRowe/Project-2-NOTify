@@ -4,6 +4,7 @@
     --primary-text-color: #befbc0;
     --primary-link-color:#64f457;
     --input-color:#4f4f4f;
+    --error-color: #d35555;
 }
 
 body{
@@ -72,8 +73,8 @@ button{
 }
 
 input[type="file"]::-webkit-file-upload-button {
-  background-color: var(--input-color);
-  color: var(--primary-text-color);
+    background-color: var(--input-color);
+    color: var(--primary-text-color);
 }
 .songs-grid{
     width: 55%;
@@ -195,7 +196,7 @@ nav{
 }
 
 .form button{
-    max-width: 30%;
+    max-width: 40%;
     align-self: center;
 }
 
@@ -284,4 +285,8 @@ i{
 .uploading-overlay .spinner i {
     font-size: 3em;
     color: var(--primary-text-color)
+}
+
+.errorMessage{
+    color: var(--error-color)
 }

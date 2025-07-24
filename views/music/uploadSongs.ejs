@@ -27,6 +27,9 @@
         </div>
         <button type="submit">Upload song</button>
 </form>
+<% if(message){ %>
+    <p class="errorMessage"><%=message%></p>
+<%}%>
 
 <div id="uploadingOverlay" class="uploading-overlay hidden">
     <div class="spinner">

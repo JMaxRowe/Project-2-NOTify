@@ -17,11 +17,20 @@ router.post('/sign-up', async (req, res)=>{
     try {
         const {username, password, confirmPassword} = req.body
 
-        if (username.trim() === '') return res.send('Please provide a username.')
-        if (password.trim() === '') return res.send('Please provide a password.')
+        if (username.trim() === '')  {
+            req.session.message = ('Please provide a username.')
+            return res.redirect('/auth/sign-up')
+        }
+        if (password.trim() === '') {
+            req.session.message = ('Please provide a password.')
+            return res.redirect('/auth/sign-up')
+        }
 
         const existingUser = await User.findOne({ username: username })
-        if (existingUser) return res.send('Username already taken. Please try another.')
+        if (existingUser)  {
+            req.session.message = ('Username already taken')
+            return res.redirect('/auth/sign-up')
+        }
 
         const user = await User.create(req.body)
 
@@ -43,10 +52,14 @@ router.post('/sign-in', async (req, res) => {
         const { username, password } = req.body
 
         const existingUser = await User.findOne({ username: username })
-        if (!existingUser) return res.send('Invalid credentials provided.')
+        if (!existingUser) {
+            req.session.message = ('Invalid credentials provided.')
+            return res.redirect('/auth/sign-in')
+        }
 
         if (!bcrypt.compareSync(password, existingUser.password)) {
-            return res.send('Invalid credentials provided.')
+            req.session.message = ('Invalid credentials provided.')
+            return res.redirect('/auth/sign-in')
         }
 
         req.session.user = {

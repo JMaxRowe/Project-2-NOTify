@@ -18,6 +18,21 @@ router.get('/new',isSignedIn, (req, res, next)=>{
 router.post('/new', isSignedIn, upload.single('song'), async (req, res, next)=>{
     try {
         req.body.owner = req.session.user._id
+        const { title, artist } = req.body
+        if (title.trim() === ""){
+            req.session.message = 'You must add a title'
+            return res.redirect('/songs/new')
+        }
+
+        if (artist.trim() === ""){
+            req.session.message = 'You must add an artist'
+            return res.redirect('/songs/new')
+        }
+
+        if (!req.file){
+            req.session.message = 'You must add an audio file'
+            return res.redirect('/songs/new')
+        }
 
         let songUrl
         if (req.file && req.file.buffer){
@@ -50,7 +65,7 @@ router.post('/:songId/add-to-playlist', isSignedIn, async(req, res, next)=>{
     try {
         const playlist = await Playlist.findById(req.body.playlistId)
         if (!playlist.owner.equals(req.session.user._id)){
-            return res.send("You don't have permission")
+            return res.status(403).send("You don't have permission")
         }
         if (!playlist.songs.includes(req.params.songId)){
             playlist.songs.push(req.params.songId)
