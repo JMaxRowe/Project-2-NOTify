@@ -31,6 +31,14 @@ body{
 
 .playlist-card{
     width: calc(25% - (45px / 4));
+    cursor: pointer;
+    box-sizing: border-box;
+    padding: 5px;
+    border-radius: 12px;
+}
+
+.playlist-card:hover{
+    background-color:var(--secondary-color)
 }
 
 .playlist-card img{
@@ -40,6 +48,11 @@ body{
 
 a{
     color:var(--primary-link-color);
+    text-decoration: none;
+    cursor: pointer
+}
+a:hover{
+    color: var(--primary-text-color)
 }
 
 .song-item{
@@ -104,8 +117,8 @@ nav{
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    align-content: flex-end;
-    width: 400px;
+    align-content: flex-center;
+    padding: 0.75%;
     background-color: var(--secondary-color);
     border-radius: 12px;
 }
@@ -137,10 +150,28 @@ i{
 }
 
 .play-bar .music-controls{
+    display: flex;
+    flex-direction: column;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 40%
+}
+
+#progressBar{
+    width: 100%;
+    accent-color: var(--primary-link-color);
+    cursor: pointer;
+}
+
+#volumeSlider{
+    accent-color: var(--primary-link-color);
+    cursor: pointer;
+}
+
+#playPauseIcon{
+    cursor: pointer;
 }
