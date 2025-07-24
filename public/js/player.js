@@ -43,7 +43,7 @@ function updateIcon(isPlaying) {
     if(!playPauseIcon) return;
     playPauseIcon.classList.toggle('fa-play', !isPlaying)
     playPauseIcon.classList.toggle('fa-pause', isPlaying)
- }
+    }
 
 
     updateIcon (wasPlaying)
@@ -55,6 +55,9 @@ function updateIcon(isPlaying) {
         if (audio.paused) audio.play().catch(()=>{})
         else audio.pause()
     })
+
+
+
 
     document.querySelectorAll('.play-btn').forEach(btn => {
         btn.addEventListener('click', event => {
@@ -73,7 +76,21 @@ function updateIcon(isPlaying) {
         })
     })
 
-    
+    audio.addEventListener('ended', () =>{
+    const items        = Array.from(document.querySelectorAll('.song-item'))
+    const currentIndex = items.findIndex(item => item.dataset.src === audio.src)
+    const nextIndex    = (currentIndex + 1) % items.length
+    const nextItem     = items[nextIndex]
+    const nextSrc      = nextItem.dataset.src
+    const nextTitle    = nextItem.querySelector('h4').textContent
+
+    audio.src = nextSrc
+    titleEl.textContent = nextTitle
+    localStorage.setItem('currentTrack', nextSrc)
+    localStorage.setItem('currentTitle', nextTitle)
+    localStorage.setItem('currentTime', 0)
+    audio.play().catch(() => {})
+    })
 
     
 })
