@@ -76,7 +76,7 @@ function updateIcon(isPlaying) {
         btn.addEventListener('click', event => {
             const item = event.currentTarget.closest('.song-item')
             const src = item?.dataset.src
-            const title = item?.querySelector('h4')?.textContent
+            const title = item?.querySelector('h3')?.textContent
 
         if (!src) return
         audio.src = src
