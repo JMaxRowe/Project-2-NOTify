@@ -84,11 +84,6 @@ input[type="file"]::-webkit-file-upload-button {
 .songs-grid{
     width: 55%;
 }
-.song-list{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
 
 .song-item{
     display: flex;
@@ -143,18 +138,6 @@ input[type="file"]::-webkit-file-upload-button {
 }
 
 
-nav{
-    display: flex;
-    justify-content: space-evenly;
-    width: 100%;
-    background-color: var(--secondary-color) ;
-    padding: 20px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 20px;
-    align-items: center;
-}
 
 
 
@@ -300,4 +283,35 @@ i{
 .logo{
     font-size: 2em;
     font-weight: bold;
+}
+
+.playlist-card {
+    position: relative;
+}
+
+.bookmark-form {
+    position: absolute;
+    top: 8px; right: 8px;
+}
+
+.bookmark-btn {
+    background: transparent;
+    border: none;
+    color: var(--primary-text-color);
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+nav{
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    background-color: var(--secondary-color) ;
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 20px;
+    align-items: center;
+    z-index: 9999;
 }

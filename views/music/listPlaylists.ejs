@@ -19,6 +19,17 @@
             style ="cursor: pointer;"
             >
             <img src="<%=playlist.coverArt || DEFAULT_PLAYLIST_COVER%>" alt="<%= playlist.title %> cover art">
+            <% if (user) { %>
+                <form 
+                action="/playlists/<%=playlist._id%>/bookmarks/<%=user._id%>?_method=<%= playlist.userBookmarks.includes(user._id) ? 'DELETE' : 'POST' %>" 
+                method="POST"
+                class="bookmark-form"
+                >
+                <button type="submit" class="bookmark-btn" aria-label="Bookmark">
+                    <i class="fa-<%= playlist.userBookmarks.includes(user._id) ? 'solid' : 'regular' %> fa-bookmark"></i>
+                </button>
+                </form>
+            <% } %>
             <div class="playlist-title"><%=playlist.title%></div>
             <div class="playlist-owner">Created by: <%=playlist.owner.username%></div>
         </div>

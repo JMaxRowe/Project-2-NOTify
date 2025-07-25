@@ -127,4 +127,26 @@ router.put('/:playlistId', isSignedIn, async (req, res, next)=>{
     }
 })
 
+router.post('/:playlistId/bookmarks/:userId', async (req, res, next) => {
+    try {
+        await Playlist.findByIdAndUpdate(
+        req.params.playlistId,
+        { $addToSet: { userBookmarks: req.params.userId } }
+        );
+        const back = req.get('Referer') || '/playlists'
+        res.redirect(back);
+    } catch (err) { next(err) }
+});
+
+router.delete('/:playlistId/bookmarks/:userId', async (req, res, next) => {
+    try {
+        await Playlist.findByIdAndUpdate(
+        req.params.playlistId,
+        { $pull: { userBookmarks: req.params.userId } }
+        );
+        const back = req.get('Referer') || '/playlists'
+        res.redirect(back);
+    } catch (err) { next(err) }
+});
+
 export default router

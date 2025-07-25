@@ -13,11 +13,12 @@ const playlistSchema = new mongoose.Schema({
         ref: 'User',
         required: true,
     },
-    bookmarkedByUsers: [
-    {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',},],
     coverArt : {type: String},
+    userBookmarks: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    }]
+    
 }) 
 
 const Playlist = mongoose.model('Playlist', playlistSchema)

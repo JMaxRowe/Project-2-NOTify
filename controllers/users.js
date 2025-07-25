@@ -11,6 +11,9 @@ router.get('/profile',isSignedIn, async (req, res, next)=>{
         const playlistsOwned = await Playlist.find({
             owner: loggedInUser
         }).populate('owner')
+        const bookmarkedPlaylists = await Playlist.find({
+            userBookmarks: loggedInUser
+        }).populate('owner')
         const songsOwned = await Song.find({
             owner: loggedInUser
         }).populate('owner')
@@ -19,7 +22,8 @@ router.get('/profile',isSignedIn, async (req, res, next)=>{
             playlistsOwned,
             playlists,
             DEFAULT_PLAYLIST_COVER: process.env.DEFAULT_PLAYLIST_COVER,
-            songsOwned
+            songsOwned,
+            bookmarkedPlaylists
         })
     } catch (error) {
         next(error)
