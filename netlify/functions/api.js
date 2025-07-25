@@ -14,9 +14,10 @@ import userRouter from '../../controllers/users.js'
 import playlistsRouter from '../../controllers/playlists.js'
 import songsRouter from '../../controllers/songs.js'
 import Playlist from '../../models/playlist.js'
+import passMessageToView from '../../middleware/passMessageToView.js'
 
 const app = express()
-const port = process.env.PORT || 3000
+
 
 app.use(bodyParser)
 app.use (methodOverride('_method'))
@@ -32,6 +33,7 @@ app.use(session({
 }))
 app.use(passUserToView)
 app.use(express.static('public'))
+app.use(passMessageToView)
 
 
 app.get('/', async (req, res)=>{
@@ -68,8 +70,6 @@ mongoose.connection.on('connected', () => {
     console.log(`Connected to MongoDB ${mongoose.connection.name}.`)
 })
 
-// app.listen(port, ()=>{
-//     console.log(`The express app is ready on port ${port}!`)
-// })
+
 
 export const handler = serverless(app)
