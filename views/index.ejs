@@ -26,7 +26,10 @@
             data-url = "/playlists/<%= playlist._id %>"
             style ="cursor: pointer;"
             >
-            <img src="<%=playlist.coverArt || DEFAULT_PLAYLIST_COVER%>" alt="<%= playlist.title %> cover art">
+            <div class="coverArt">
+                <img src="<%=playlist.coverArt || DEFAULT_PLAYLIST_COVER%>" alt="<%= playlist.title %> cover art">
+            </div>
+            
             <% if (user) { %>
                 <form 
                 action="/playlists/<%=playlist._id%>/bookmarks/<%=user._id%>?_method=<%= playlist.userBookmarks.includes(user._id) ? 'DELETE' : 'POST' %>" 

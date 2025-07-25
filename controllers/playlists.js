@@ -122,17 +122,21 @@ router.delete('/:playlistId/songs/:songId', isSignedIn, async(req, res, next)=>{
     }
 })
 
-router.put('/:playlistId', isSignedIn, async (req, res, next)=>{
+router.put('/:playlistId', isSignedIn, upload.single('coverArt'), async (req, res, next)=>{
     
     try {
         const playlist = await Playlist.findById(req.params.playlistId)
-    if(playlist.owner.equals(req.session.user._id)){
+        if (!playlist.owner.equals(req.session.user._id)) {
+            return res.status(403).send("You don't have permission")
+        }
+
+        if (req.file && req.file.buffer) {
+            const result = await cloudinaryUpload(req.file.buffer)
+            req.body.coverArt = result.secure_url
+        }
+
         await playlist.updateOne(req.body)
-        console.log('updated')
         return res.redirect(`/playlists/${playlist._id}`)
-    } else {
-        return res.send("You don't have permission to do that.")
-    }
     } catch (error) {
         next(error)
     }
