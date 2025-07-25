@@ -50,11 +50,16 @@ app.use('/songs', songsRouter)
 
 
 app.use((req, res)=>{
-    return res.render('errors/404.ejs')
+    return res.status(404).render('errors/error.ejs', {
+        status: 404,
+        message: 'Page not found'
+    })
 })
 
 app.use((err, req, res, next)=>{
-    res.status(err.status || 500).render('errors/error.ejs', { error: err })
+    console.error(err)
+    const status = err.status || 500
+    res.status(status).render('errors/error.ejs', { status, message: err.message })
 })
 
 mongoose.connect(process.env.MONGODB_URI, {dbName : process.env.DB_NAME})

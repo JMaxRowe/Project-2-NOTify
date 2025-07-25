@@ -1,4 +1,4 @@
-![NOTify homepage](/screenshots/Screenshot%202025-07-24%20at%2023.20.28.png)
+![NOTify homepage](/screenshots/Screenshot%202025-07-25%20at%2004.42.00.png)
 
 # NOTify
 

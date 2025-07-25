@@ -9,9 +9,20 @@ const router = express.Router()
 
 router.get('/', async (req, res, next)=>{
     try {
-        const playlists = await Playlist.find().populate('owner')
+        const playlists = await Playlist.find().populate('owner', 'userBookmarks')
+        const popularPlaylists = await Playlist.aggregate([
+        {$addFields: {
+            bookmarkCount: {
+                $size: { $ifNull: [ '$userBookmarks', [] ] }}
+        }
+    },
+    { $sort: { bookmarkCount: -1 } },
+    { $limit: 10 }
+    ])
+        const topTenPlaylists = await Playlist.populate(popularPlaylists, 'owner')
         return res.render('music/listPlaylists.ejs', { 
             playlists,
+            topTenPlaylists,
             DEFAULT_PLAYLIST_COVER: process.env.DEFAULT_PLAYLIST_COVER
         })
     } catch (error) {

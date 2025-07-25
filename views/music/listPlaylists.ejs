@@ -35,6 +35,31 @@
         </div>
         <% }) %>
     </div>
+    <h1>Popular Playlists:</h1>
+    <div class="playlists-grid">
+        <% topTenPlaylists.forEach(playlist => { %>
+        <div class="playlist-card"
+            data-url = "/playlists/<%= playlist._id %>"
+            style ="cursor: pointer;"
+            >
+            <img src="<%=playlist.coverArt || DEFAULT_PLAYLIST_COVER%>" alt="<%= playlist.title %> cover art">
+            <% if (user) { %>
+                <% const bookmarks = playlist.userBookmarks || [];%>
+                <% const isBookmarked = bookmarks.map(u=>u.toString()).includes(user._id.toString());%>
+                <form action="/playlists/<%=playlist._id%>/bookmarks/<%=user._id%>?_method=<%= isBookmarked ? 'DELETE' : 'POST' %>"
+                method="POST"
+                class="bookmark-form"
+                >
+                <button type="submit" class="bookmark-btn" aria-label="Bookmark">
+                    <i class="fa-<%= isBookmarked ? 'solid' : 'regular' %> fa-bookmark"></i>
+                </button>
+                </form>
+            <% } %>
+            <div class="playlist-title"><%=playlist.title%></div>
+            <div class="playlist-owner">Created by: <%=playlist.owner.username%></div>
+        </div>
+        <% }) %>
+    </div>
     <%-include('../partials/playbar.ejs')%>
     <script src="/js/clickOnPlaylist.js"></script>
     <script src="https://kit.fontawesome.com/74f211b69a.js" crossorigin="anonymous"></script>
