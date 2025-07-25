@@ -27,6 +27,9 @@
         </div>
         <button type="submit">Upload song</button>
 </form>
+    <p id="fileSizeError" class="errorMessage hidden">
+        File is too big. Please select one under 6 MB.
+    </p>
 <% if(message){ %>
     <p class="errorMessage"><%=message%></p>
 <%}%>
@@ -44,5 +47,6 @@
     <audio id="global-audio" style="display:none"></audio>
     <script src="/js/player.js" defer></script>
     <script src="/js/spinner.js" defer></script>
+    <script src="/js/limitFileSize.js" defer></script>
 </body>
 </html>
