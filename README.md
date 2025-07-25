@@ -3,7 +3,7 @@
 # NOTify
 
 ## Getting Started
-Follow deployment link:
+Follow deployment link: https://project2-notify.netlify.app/
 
 Trello Board: https://trello.com/b/7bDWeU6k/notify-project-2
 
