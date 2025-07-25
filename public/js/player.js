@@ -76,7 +76,7 @@ function updateIcon(isPlaying) {
         btn.addEventListener('click', event => {
             const item = event.currentTarget.closest('.song-item')
             const src = item?.dataset.src
-            const title = item?.querySelector('h3')?.textContent
+            const title = item?.querySelector('.songTitle')?.textContent
 
         if (!src) return
         audio.src = src
@@ -95,7 +95,7 @@ function updateIcon(isPlaying) {
     const nextIndex    = (currentIndex + 1) % items.length
     const nextItem     = items[nextIndex]
     const nextSrc      = nextItem.dataset.src
-    const nextTitle    = nextItem.querySelector('h3').textContent
+    const nextTitle    = nextItem.querySelector('.songTitle').textContent
 
     audio.src = nextSrc
     titleEl.textContent = nextTitle
