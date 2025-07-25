@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
             submitBtn.disabled= true
         } else {
             errorMessage.classList.add('hidden')
+            submitBtn.disabled = false
         }
     })
 })
