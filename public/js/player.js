@@ -95,7 +95,7 @@ function updateIcon(isPlaying) {
     const nextIndex    = (currentIndex + 1) % items.length
     const nextItem     = items[nextIndex]
     const nextSrc      = nextItem.dataset.src
-    const nextTitle    = nextItem.querySelector('h4').textContent
+    const nextTitle    = nextItem.querySelector('h3').textContent
 
     audio.src = nextSrc
     titleEl.textContent = nextTitle
