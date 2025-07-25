@@ -58,7 +58,7 @@ router.post('/', isSignedIn, upload.single('coverArt'), async (req, res, next)=>
     }
 })
 
-router.get('/:playlistId', async (req, res, next)=>{
+router.get('/:playlistId', isSignedIn, async (req, res, next)=>{
     try {
         const {playlistId} = req.params
         const playlist = await Playlist.findById(playlistId).populate('owner').populate('songs')
