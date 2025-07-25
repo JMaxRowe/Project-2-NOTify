@@ -113,24 +113,3 @@ function updateIcon(isPlaying) {
     
 })
 
-// document.addEventListener('DOMContentLoaded', () => {
-//     const audio = document.getElementById('global-audio')
-//     const volumeSlider = document.getElementById('volumeSlider')
-//     if (!audio || !volumeSlider) return
-
-
-//     const savedVol = parseFloat(localStorage.getItem('audioVolume'))
-//     if (!isNaN(savedVol)) {
-//         audio.volume= savedVol
-//         volumeSlider.value = savedVol
-//     } else {
-//         volumeSlider.value = audio.volume
-//     }
-
-
-//     volumeSlider.addEventListener('input', e => {
-//         const vol = parseFloat(e.currentTarget.value)
-//         audio.volume = vol
-//         localStorage.setItem('audioVolume', vol)
-//     })
-// })
