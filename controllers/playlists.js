@@ -9,7 +9,7 @@ const router = express.Router()
 
 router.get('/', async (req, res, next)=>{
     try {
-        const playlists = await Playlist.find().populate('owner', 'userBookmarks')
+        const playlists = await Playlist.find().populate('owner')
         const popularPlaylists = await Playlist.aggregate([
         {$addFields: {
             bookmarkCount: {
